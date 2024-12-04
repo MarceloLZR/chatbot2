@@ -153,20 +153,27 @@ def main():
         archivo_subido = st.file_uploader("Elige una imagen de medicamento", type=["jpg", "png", "jpeg"])
         
         if archivo_subido is not None:
+            # Mostrar la imagen subida
             st.image(archivo_subido, caption='Medicamento Subido', use_column_width=True)
             
+            # Extraer el nombre del archivo
+            nombre_archivo = archivo_subido.name
+            
+            
             mensaje_sistema = (
-                "Eres un asistente especializado en identificar medicamentos a partir de imágenes. "
-                "Proporciona información completa sobre las características, usos y precauciones del medicamento."
+                "Eres un asistente especializado en identificar medicamentos a partir de descripciones detalladas. "
+                "Proporciona información completa sobre las características, usos y precauciones del medicamento basándote en el nombre del archivo."
             )
             
             if st.button("Analizar Medicamento"):
+                # Simular análisis utilizando el nombre del archivo
                 respuesta = generar_respuesta(
-                    "Analiza esta imagen de medicamento y proporciona información detallada.", 
+                    f"Analiza el medicamento con este nombre: {nombre_archivo}. Proporciona información detallada (como usarlo, contraindicaciones, dosis, etc) pero no hagas referencia al nombre completo, por ejemplo panadol.jpg, solo centrate en panadol.", 
                     mensaje_sistema
                 )
                 st.markdown("### Detalles del Medicamento")
                 st.write(respuesta)
+
 
     # Sección de Medicamentos Comunes
     elif page == "Medicamentos Comunes":
